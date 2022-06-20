@@ -4,8 +4,7 @@ export const infoAboutStatesStore = defineStore('store', {
     state: () => {
         return {
             newState: {},
-            newHash: '',
-            viewedStates: [],
+            viewedStates: JSON.parse(localStorage.getItem('viewedStates'))||[],
             loading: false,
         }
     },

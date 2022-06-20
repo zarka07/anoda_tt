@@ -1,9 +1,20 @@
 <template>
   <div class="row col-12 query-list-component">
     <h3>Your querys:</h3>
-    <p v-for="query in stateStore.info" :key="query">
-        {{query}}
-    </p>
+    <div v-for="state in states" :key="state">
+      <router-link
+        :to="{
+          name: 'StateId',
+          params: {
+            id: JSON.parse(state).hash,
+            date: JSON.parse(state).date,
+            total: JSON.parse(state).total,
+          },
+        }"
+      >
+        {{ JSON.parse(state).state }}
+      </router-link>
+    </div>
   </div>
 </template>
 <script>
@@ -16,6 +27,16 @@ export default {
       stateStore,
     };
   },
+  computed: {
+    // states() {
+    //   return JSON.parse(Object.values(this.stateStore.viewedStates));
+    // },
+    states() {
+      //console.log(JSON.parse(this.stateStore.viewedStates))
+      //return JSON.parse(this.stateStore.viewedStates)
+      return this.stateStore.viewedStates;
+    },
+  },
 };
 </script>
 
@@ -24,6 +45,10 @@ export default {
   background-color: slategray;
   min-height: 250px;
   width: 80%;
+  color: #fff;
+}
+
+a {
   color: #fff;
 }
 </style>
