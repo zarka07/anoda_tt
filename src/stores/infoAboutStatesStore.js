@@ -3,12 +3,10 @@ import { defineStore } from 'pinia';
 export const infoAboutStatesStore = defineStore('store', {
     state: () => {
         return {
-            
             newState: {},
-            viewedStatesHashs: [],
+            newHash: '',
+            viewedStates: [],
             loading: false,
-            hash: '',
-
         }
     },
     actions: {

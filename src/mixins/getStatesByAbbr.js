@@ -11,17 +11,15 @@ export default {
         async showInfo(path) {
             this.stateStore.showLoader()
             let newState = await this.get(path)
-            //let newHash = newState.hash
             this.stateStore.newState = newState
+            this.stateStore.newHash = newState.hash
             //console.log(newState)
-            //if (hash) {
-                //this.stateStore.viewedStates.push(_info)
-                // this.stateStore.newState = null
-                // this.saveState()
-            //}
-            //else {
-             //   this.showInfo(path)
-            //}
+            if (newState) {
+                this.saveState()
+            }
+            else {
+                this.showInfo(path)
+            }
         },
         async get(path, cb = null) {
             return await axios
@@ -32,10 +30,14 @@ export default {
                     this.stateStore.hideLoader()
                 })
         },
-        // saveState() {
-        //     const parsed = JSON.stringify(this.stateStore.viewedStates)
-        //     localStorage.setItem('viewedStates', parsed)
-        // }
+        saveState() {
+            const parsed = JSON.stringify(this.stateStore.newState)
+            if(localStorage.getItem('viewedStates')){
+                this.stateStore.viewedStates = JSON.parse(localStorage.getItem('viewedStates'))
+            }
+            this.stateStore.viewedStates.push(parsed)
+            localStorage.setItem('viewedStates', JSON.stringify(this.stateStore.viewedStates))
+        }
     },
 
 }
