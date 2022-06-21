@@ -13,6 +13,13 @@
           </option>
         </select>
         <label>Choose state </label>
+
+        <datepicker class="mt-4 mb-2"
+          v-model="date"
+          :disabled-dates="state.disabledDates"
+          :prevent-disable-date-selection="preventDisableDateSelection"
+        ></datepicker>
+        <label>Choose date </label>
       </div>
     </form>
     <button @click.prevent="sendRequest()" type="button" class="btn btn-info">
@@ -22,12 +29,14 @@
 </template>
 
 <script>
+import Datepicker from "vuejs3-datepicker";
 import axios from "axios";
 import getStatesByAbbr from "../mixins/getStatesByAbbr";
 import { infoAboutStatesStore } from "../stores/infoAboutStatesStore";
 export default {
   name: "select-state-component",
   mixins: [getStatesByAbbr],
+  components: { Datepicker },
   setup() {
     const stateStore = infoAboutStatesStore();
     return {
@@ -38,7 +47,13 @@ export default {
     return {
       states: [],
       current: null,
-      date:'20200501'
+      date: new Date(2021, 2, 7),
+      state: {
+        disabledDates: {
+          to: new Date(2020, 4, 1),
+        },
+        preventDisableDateSelection: true,
+      },
     };
   },
   created: async function () {
@@ -48,17 +63,20 @@ export default {
     });
   },
   computed: {
+    _date(){
+      return this.date.toISOString().substring(0,10).replace(/-/g, "")
+    },
     abbreviation() {
       return this.current.abbreviation.toLowerCase();
     },
     path() {
-      return `${this.abbreviation}/${this.date}.json` || "";
+      return `${this.abbreviation}/${this._date}.json` || "";
     },
+    
   },
   methods: {
     sendRequest() {
       this.showInfo(this.path);
-      
     },
   },
 };
@@ -69,6 +87,6 @@ export default {
   background-color: #42b983;
   min-height: 130px;
   padding: 20px;
-  color: #fff;
+  color: black;
 }
 </style>
