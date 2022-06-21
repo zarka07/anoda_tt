@@ -14,8 +14,10 @@
         </select>
         <label>Choose state </label>
 
-        <datepicker class="mt-4 mb-2"
+        <datepicker
+          class="mt-4 mb-2"
           v-model="date"
+          :open-date="openDate"
           :disabled-dates="state.disabledDates"
           :prevent-disable-date-selection="preventDisableDateSelection"
         ></datepicker>
@@ -48,9 +50,12 @@ export default {
       states: [],
       current: null,
       date: new Date(2021, 2, 7),
+      openDate: new Date(2021, 2, 7),
       state: {
+        date: new Date(2020, 4, 1),
         disabledDates: {
           to: new Date(2020, 4, 1),
+          from: new Date(2021, 2, 7),
         },
         preventDisableDateSelection: true,
       },
@@ -63,8 +68,8 @@ export default {
     });
   },
   computed: {
-    _date(){
-      return this.date.toISOString().substring(0,10).replace(/-/g, "")
+    _date() {
+      return this.date.toISOString().substring(0, 10).replace(/-/g, "");
     },
     abbreviation() {
       return this.current.abbreviation.toLowerCase();
@@ -72,7 +77,6 @@ export default {
     path() {
       return `${this.abbreviation}/${this._date}.json` || "";
     },
-    
   },
   methods: {
     sendRequest() {
