@@ -31,9 +31,8 @@ export default {
 .main {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
 }
 
-.info {
-}
 </style>

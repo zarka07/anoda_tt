@@ -1,14 +1,11 @@
 <template>
 <Header />
   <div class="main">
-    <select-state-component />
+    <select-state-component @setPages="setPages()"/>
     <show-state-component />
     <div class="d-grid col-8 m-3">
-      <button @click="show = !show" class="btn btn-primary" type="button">
-        Show your querys
-      </button>
     </div>
-    <query-list-component v-if="show" />
+    <query-list-component :key="page"/>
   </div>
 </template>
 
@@ -35,7 +32,13 @@ export default {
   data() {
     return {
       show: false,
+      page:1
     };
   },
+  methods:{
+    setPages(){
+      this.page++
+    }
+  }
 };
 </script>

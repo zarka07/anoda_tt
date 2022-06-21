@@ -19,7 +19,7 @@
           v-model="date"
           :open-date="openDate"
           :disabled-dates="state.disabledDates"
-          :prevent-disable-date-selection="preventDisableDateSelection"
+          :prevent-disable-date-selection="state.preventDisableDateSelection"
         ></datepicker>
         <label>Choose date </label>
       </div>
@@ -81,6 +81,7 @@ export default {
   methods: {
     sendRequest() {
       this.showInfo(this.path);
+      this.$emit("setPages");
     },
   },
 };

@@ -1,16 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import App from '../App.vue';
+import Main from '../views/Main.vue';
 
 const routes = [
+  
   {
     path: '/',
-    name: 'App',
-    component: App
-  },
-  {
-    path: '/Main',
     name: 'Main',
-    component: () => import(/* webpackChunkName: "Main.vue", webpackMode: "lazy" */'../views/Main.vue')
+    component: Main,
   },
   {
 		path: '/state/:id',

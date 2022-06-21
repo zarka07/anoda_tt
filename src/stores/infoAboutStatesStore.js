@@ -4,8 +4,9 @@ export const infoAboutStatesStore = defineStore('store', {
     state: () => {
         return {
             newState: {},
-            viewedStates: JSON.parse(localStorage.getItem('viewedStates'))||[],
+            viewedStates: JSON.parse(localStorage.getItem('viewedStates')) || [],
             loading: false,
+            currentPage: 1,
         }
     },
     actions: {
@@ -14,6 +15,6 @@ export const infoAboutStatesStore = defineStore('store', {
         },
         hideLoader() {
             this.loading = false
-        }
+        },
     }
 })

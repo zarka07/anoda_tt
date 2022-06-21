@@ -1,13 +1,32 @@
 <template>
   <div class="header">
-    <h2>COVID-19 STATICS</h2>
+    <h2 class="mb-0">COVID-19 STATICS</h2>
+    <button class="btn btn-danger" @click="clearHistory()">
+      Clear viewed history
+    </button>
   </div>
 </template>
 
 <script>
+import { infoAboutStatesStore } from "../stores/infoAboutStatesStore";
 export default {
   name: "header-component",
-  setup() {},
+  setup() {
+    const stateStore = infoAboutStatesStore();
+    return {
+      stateStore,
+    };
+  },
+  methods: {
+    clearHistory() {
+      if (localStorage) {
+        localStorage.clear();
+        this.stateStore.viewedStates = [];
+        this.stateStore.currentPage = 1;
+      }
+      else return
+    },
+  },
 };
 </script>
 
@@ -18,6 +37,6 @@ export default {
   height: 10vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 </style>

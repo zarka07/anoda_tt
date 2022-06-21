@@ -11,7 +11,9 @@
       <thead>
         <tr>
           <th scope="col">State: {{ this.stateStore.newState.state }}</th>
-          <th scope="col">Date: {{ this.stateStore.newState.date }}</th>
+          <th scope="col">
+            Date: {{ this.stateStore.newState.date + 1 || "" }}
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -41,22 +43,6 @@ export default {
   data() {
     return {};
   },
-  // mounted() {
-  //   if (localStorage.getItem("viewedStates")) {
-  //     try {
-  //       this.stateStore.viewedStates = JSON.parse(
-  //         localStorage.getItem("viewedStates")
-  //       );
-  //     } catch (e) {
-  //       localStorage.removeItem("viewedStates");
-  //     }
-  //   }
-  // },
-  // computed: {
-  //   state() {
-  //     return this.stateStore.viewedStates;
-  //   },
-  // },
 };
 </script>
 
